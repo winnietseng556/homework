@@ -1,15 +1,23 @@
 package com.train
 
-import java.util.*
-
 fun main(args: Array<String>) {
-    var scanner = Scanner(System.`in`)
-    println("Please enter number of tickets:")
-    var tickets = scanner.nextInt()
-    println("How many round-trip tickets:")
-    var returns = scanner.nextInt()
-    var ticket = Ticket(tickets, returns)
-    ticket.printReceipt()
+    var tickets = 0
+    while (!finish(tickets)) {
+        println("Please enter number of tickets(Finish please enter -1):")
+        tickets = readLine()!!.toInt()
+
+        if (!finish(tickets)) {
+            println("How many round-trip tickets:")
+            var returns = readLine()!!.toInt()
+            var ticket = Ticket(tickets, returns)
+            ticket.printReceipt()
+        } else
+            println("Thank you, have a good trip!")
+    }
+}
+
+fun finish(tickets: Int): Boolean {
+    return tickets == -1
 }
 
 class Ticket(var tickets: Int, var returns: Int) {

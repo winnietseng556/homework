@@ -5,12 +5,22 @@ import java.util.Scanner;
 public class Tester {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter number of tickets:");
-        int tickets = scanner.nextInt();
-        System.out.println("How many round-trip tickets:");
-        int returns = scanner.nextInt();
+        int tickets = 0;
+        while (!finish(tickets)) {
+            System.out.println("Please enter number of tickets(Finish please enter -1):");
+            tickets = scanner.nextInt();
 
-        Ticket ticket = new Ticket(tickets,returns);
-        ticket.printReceipt();
+            if (!finish(tickets)) {
+                System.out.println("How many round-trip tickets:");
+                int returns = scanner.nextInt();
+                Ticket ticket = new Ticket(tickets, returns);
+                ticket.printReceipt();
+            } else
+                System.out.println("Thank you, have a good trip!");
+        }
+    }
+
+    private static boolean finish(int tickets) {
+        return tickets == -1;
     }
 }
